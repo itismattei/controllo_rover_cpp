@@ -127,9 +127,10 @@ void loop1(void){
 		}
 
 		if (dist.updated){
+			dist.regCpy();
 			dist.updated = false;
-
 		}
+
 //		static uint32_t valore, prevTICK;
 //		static uint8_t i2cB[8] = {0};
 //		static uint8_t ADD = 0x27;
