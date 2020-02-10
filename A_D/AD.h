@@ -39,6 +39,7 @@ public:
 
 	void sample(void);
 	void regCpy(void);
+	void stampa(void);
 
 	bool updated;
 	uint32_t distanza[5];

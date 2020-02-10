@@ -6,6 +6,7 @@
  */
 
 #include "AD.h"
+#include <stdio.h>
 
 A_D::A_D() {
 	// TODO Auto-generated constructor stub
@@ -34,4 +35,13 @@ void A_D::regCpy(void){
 		Nota	=	ADCbuffer[6];
 		BATT	= 	ADCbuffer[7];
 	}
+}
+
+
+void A_D::stampa(void){
+	for (int i = 0; i < 5; i++)
+		printf("distanza %d = %d\n", i, distanza[i]);
+	printf("gas =\t %d\n",Sgas);
+	printf("BATT =\t %d\n", BATT);
+	printf("nota =\t %d\n", Nota);
 }

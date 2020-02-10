@@ -129,6 +129,7 @@ void loop1(void){
 		if (dist.updated){
 			dist.regCpy();
 			dist.updated = false;
+			dist.stampa();
 		}
 
 //		static uint32_t valore, prevTICK;
