@@ -40,8 +40,8 @@ void A_D::regCpy(void){
 
 void A_D::stampa(void){
 	for (int i = 0; i < 5; i++)
-		printf("distanza %d = %d\n", i, distanza[i]);
-	printf("gas =\t %d\n",Sgas);
-	printf("BATT =\t %d\n", BATT);
-	printf("nota =\t %d\n", Nota);
+		printf("distanza %d = %d\n", i, (int)distanza[i]);
+	printf("gas =\t %d\n", (int)Sgas);
+	printf("BATT =\t %d\n", (int) BATT);
+	printf("nota =\t %d\n", (int) Nota);
 }
