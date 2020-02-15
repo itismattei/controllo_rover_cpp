@@ -25,8 +25,12 @@
 #include "main.h"
 #include <stdbool.h>
 #include <stdio.h>
+#include <array>
 #include "setup.h"
 #include "AD.h"
+#include "../sens_meas/sens_meas.h"
+
+using namespace std;
 
 ADC_HandleTypeDef hadc1;
 DMA_HandleTypeDef hdma_adc1;
@@ -39,6 +43,7 @@ TIM_HandleTypeDef htim3;
 
 UART_HandleTypeDef huart2;
 
+/// oggetto A_D che tiene i valori delle letture dei sensori analogici
 A_D dist;
 
 /// buffer che contiene i caratteri ricevuti sulla seriale ed indice di caricamento
@@ -112,6 +117,9 @@ void setup(void){
 void loop1(void){
 	///
 	uint32_t TICK1S = 0;
+	array<A_D, 10> VA;
+	int VA_index = 0;
+
 
 	/// qui si possono mettere gli oggetti che gestiranno le funzioni del rover
 	for(;;)
@@ -130,6 +138,7 @@ void loop1(void){
 			dist.regCpy();
 			dist.updated = false;
 			dist.stampa();
+			aggMemMisureDist(&dist, VA, &VA_index);
 		}
 
 //		static uint32_t valore, prevTICK;
