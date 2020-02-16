@@ -12,7 +12,7 @@
 ///////////////////////////////////////////////
 ///// ADDRESS
 ///////////////////////////////////////////////
-#define		GYRO_ADDR		0x6B
+#define		GYRO_ADDR		0x6B  /// oppure 0x6A dipendentemente da SDO_A/G
 
 
 ///////////////////////////////////////////////
@@ -98,6 +98,9 @@
 
 #define		ALL_AXIS			0x7
 #define		Z_AXIS				0x4
+
+/// REGISTER VALUE
+#define		WOH_AM_I_value		0x68	///LSM9DS1
 
 
 #include "genDef.h"

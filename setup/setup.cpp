@@ -29,6 +29,8 @@
 #include "setup.h"
 #include "AD.h"
 #include "../sens_meas/sens_meas.h"
+#include "I2C.h"
+#include "imu.h"
 
 using namespace std;
 
@@ -44,7 +46,12 @@ TIM_HandleTypeDef htim3;
 UART_HandleTypeDef huart2;
 
 /// oggetto A_D che tiene i valori delle letture dei sensori analogici
-A_D dist;
+static A_D dist;
+/// oggetto I2C per gestire le comunicazioni su tale bus
+/// richiede l'indirizzo del gestore del bus I2C
+static I2C i2cConn(&hi2c1);
+/// oggetto Giroscopio per misurare le rotazioni
+static Giroscopio G;
 
 /// buffer che contiene i caratteri ricevuti sulla seriale ed indice di caricamento
 volatile uint8_t READ_BUFF[READ_DIM_BUFF], READ_PTR;
@@ -92,9 +99,12 @@ void setup(void){
 	MX_TIM3_Init();
 	/* USER CODE BEGIN 2 */
 
-	printf("\n\nProgramma di test!\n\n");
+	printf("\n\nROVER OBII\n\n");
+	printf("****************\n");
+	printf("numero reale \n\n");
 	PRINTFL(1234500000, 7);
 	printf("\n\n");
+	printf("scritto in C++\n\n");
 
 	/* USER CODE END 2 */
 
@@ -105,6 +115,8 @@ void setup(void){
 
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
+	/// connesso il giroscopio
+	G.attachI2C(&i2cConn, GYRO_ADDR);
 
 }
 
@@ -117,7 +129,7 @@ void setup(void){
 void loop1(void){
 	///
 	uint32_t TICK1S = 0;
-	array<A_D, 10> VA;
+	array<A_D, 10> VA;		/// vettore di 10 elementi derivanti dal campionamento degli AD
 	int VA_index = 0;
 
 
@@ -137,8 +149,9 @@ void loop1(void){
 		if (dist.updated){
 			dist.regCpy();
 			dist.updated = false;
-			dist.stampa();
+			//dist.stampa();
 			aggMemMisureDist(&dist, VA, &VA_index);
+			stampaMisureDist(VA);
 		}
 
 //		static uint32_t valore, prevTICK;

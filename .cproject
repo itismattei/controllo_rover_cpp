@@ -66,6 +66,7 @@
 									<listOptionValue builtIn="false" value="../A_D"/>
 									<listOptionValue builtIn="false" value="../I2C"/>
 									<listOptionValue builtIn="false" value="../SENS_MEAS"/>
+									<listOptionValue builtIn="false" value="../sensors"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.895525625" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
 							</tool>

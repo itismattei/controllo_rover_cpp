@@ -30,10 +30,10 @@ void A_D::sample(void){
 
 void A_D::regCpy(void){
 	for (int i = 0; i < 5; i++){
-		distanza[i] = ADCbuffer[i];
-		Sgas	=	ADCbuffer[5];
-		Nota	=	ADCbuffer[6];
-		BATT	= 	ADCbuffer[7];
+		distanza[i] = (uint16_t)ADCbuffer[i];
+		Sgas	=	(uint16_t)ADCbuffer[5];
+		Nota	=	(uint16_t)ADCbuffer[6];
+		BATT	= 	(uint16_t)ADCbuffer[7];
 	}
 }
 

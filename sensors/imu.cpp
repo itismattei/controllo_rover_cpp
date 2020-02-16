@@ -99,7 +99,7 @@ void Giroscopio::azzeraAssi(){
 				//PRINTF("REG_STAT 0x%x\n", valore);
 				if (valore != 0){
 					/// tutti gli assi on
-					i2cPtr->I2CGetN(OUT_X_L | MUL_READ , 6, buffer);
+					i2cPtr->I2CGetN(OUT_X_L | MUL_READ , 6, buffer3A);
 					x += (int16_t)((buffer3A[1]<< 8) + buffer3A[0]);
 					y += (int)((buffer3A[3]<< 8) + buffer3A[2]);
 					z += (int)((buffer3A[5]<< 8) + buffer3A[4]);
@@ -201,7 +201,7 @@ void Giroscopio::initGyro(char assi){
 		IsPresent = NOT_PRESENT;
 	}
 	else{
-		if (i2cPtr->I2CGet(WHO_AM_I) == 0xD4){
+		if (i2cPtr->I2CGet(WHO_AM_I) == WOH_AM_I_value){
 
 			/// TODO: DA RIDEFINIRE
 			//blinkBlueLed();

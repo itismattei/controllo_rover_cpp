@@ -14,6 +14,11 @@
   * Aggiunti i due segnali PWM per la potenza sui motori: PB4 (D5) e PC7(D9)
   * Gestione della UART2 ad interruzione sia in ricezione che in trasmissione.
   *
+  * Nel ramo attuale e' stata migliorata la stampa su uart ad nterruzione con buffer
+  * da 1K, e' stata inserita la classe Giroscopio con l'indirizzo del sensore
+  * LSM9DS1;
+  * Le distanze sono poste su uint16_t
+  *
   *
   ******************************************************************************
   ******************************************************************************

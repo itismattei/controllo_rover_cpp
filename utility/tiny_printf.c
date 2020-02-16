@@ -306,24 +306,34 @@ int _write(int fd, char *str, int len){
 	return len;
 }
 
-
-uint8_t INTBUFF[128];
-uint8_t SPTR = 0;
+#define DIM_PRINT_BUFF	1024
+uint8_t INTBUFF[DIM_PRINT_BUFF];
+uint16_t SPTR = 0;
+extern uint16_t LOCAL_SPTR;
 ///
 /// gestisce la scrittura ad interruzione
 int _writeINT(int fd, char *str, int len){
 
 	/* Enable the UART Transmit data register empty Interrupt */
 	//__HAL_UART_ENABLE_IT(&huart2, UART_IT_TXE);
-	if (SPTR == 0){
-		strncpy ((char*)INTBUFF, str, len);
+	if(len < DIM_PRINT_BUFF && SPTR < DIM_PRINT_BUFF){
+		if (SPTR == 0){
+			strncpy ((char*)INTBUFF, str, len);
+		}
+		else{
+			strncpy ((char*)&INTBUFF[SPTR], str, len);
+		}
+		SPTR += len;
+		/// abilita le interruzioni
+		__HAL_UART_ENABLE_IT(&huart2, UART_IT_TXE);
+
 	}
 	else{
-		strncpy ((char*)&INTBUFF[SPTR], str, len);
+		/// ha riempito il buffer e quindi deve aspettare che la trasmissione lo svuoti
+		/// abilita le interruzioni
+		__HAL_UART_ENABLE_IT(&huart2, UART_IT_TXE);
+		while(LOCAL_SPTR <= SPTR);
 	}
-	SPTR += len;
-	/// abilita le interruzioni
-	__HAL_UART_ENABLE_IT(&huart2, UART_IT_TXE);
 
 	return 0;
 }

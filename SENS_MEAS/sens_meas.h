@@ -13,6 +13,7 @@
 using namespace std;
 
 int aggMemMisureDist(A_D *, array<A_D, 10>&, int *);
+void stampaMisureDist(array<A_D, 10>& VA);
 
 
 #endif /* SENS_MEAS_H_ */

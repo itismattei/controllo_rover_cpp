@@ -42,10 +42,10 @@ public:
 	void stampa(void);
 
 	bool updated;
-	uint32_t distanza[5];
-	uint32_t Sgas;
-	uint32_t Nota;
-	uint32_t BATT;
+	uint16_t distanza[5];
+	uint16_t Sgas;
+	uint16_t Nota;
+	uint16_t BATT;
 };
 
 #endif /* AD_H_ */
