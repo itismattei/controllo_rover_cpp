@@ -75,6 +75,8 @@ static void MX_I2C1_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_TIM3_Init(void);
 
+extern "C" void welcome(void);
+
 /**
   * @brief  funzione che serve per impostare le periferiche.
   * @param  nessuno, le variabili sono globali
@@ -99,12 +101,8 @@ void setup(void){
 	MX_TIM3_Init();
 	/* USER CODE BEGIN 2 */
 
-	printf("\n\nROVER OBII\n\n");
-	printf("****************\n");
-	printf("numero reale \n\n");
-	PRINTFL(1234500000, 7);
-	printf("\n\n");
-	printf("scritto in C++\n\n");
+	///messaggio di benvenuto
+	welcome();
 
 	/* USER CODE END 2 */
 
@@ -137,7 +135,8 @@ void loop1(void){
 	for(;;)
 	{
 		if (TICK_MS - TICK1S >= SEC){
-
+			////////////////////////////////////////////////////////
+			//// AZIONE OGNI SECONDO 	////////////////////////////
 			toggleLed();
 			TICK1S = TICK_MS;
 			if (dist.updated == false)
@@ -146,6 +145,8 @@ void loop1(void){
 				dist.sample();
 		}
 
+		////////////////////////////////////////////////////////////
+		//// AZIONI SINCRONIZZATE AD ALTRI EVENTI	////////////////
 		if (dist.updated){
 			dist.regCpy();
 			dist.updated = false;
